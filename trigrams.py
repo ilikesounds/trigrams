@@ -1,5 +1,6 @@
 # -*- encode: utf-8 -*-
 import io
+import random
 
 
 def create_raw_string(book):
@@ -24,8 +25,15 @@ def format_string_for_list(text):
     return new_text.replace('\n', ' ').split()
 
 
-def create_trigram_list(list_input, n):
+def create_trigram_dict(list_input):
     """
-    Creates a trigram tuple list based on a list input
+    Creates a trigram dictionary based on a list input
     """
-    return list(zip(*[list_input[i:] for i in range(n)]))
+    temp_dict = {}
+    temp = list(zip(*[list_input[i:] for i in range(3)]))
+    for index_0, index_1, index_2 in temp:
+        if temp_dict.get((index_0, index_1)):
+            temp_dict[(index_0, index_1)].append(index_2)
+        else:
+            temp_dict[(index_0, index_1)] = [index_2]
+    return temp_dict
