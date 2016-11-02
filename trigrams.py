@@ -22,3 +22,10 @@ def format_string_for_list(text):
         text.maketrans(punctuation, replacement_punctuation)
         )
     return new_text.replace('\n', ' ').split()
+
+
+def create_trigram_list(list_input, n):
+    """
+    Creates a trigram tuple list based on a list input
+    """
+    return list(zip(*[list_input[i:] for i in range(n)]))
