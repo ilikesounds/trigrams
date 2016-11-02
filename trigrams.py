@@ -10,3 +10,15 @@ def create_raw_string(book):
     raw_string = open_file.read(13000)
     open_file.close()
     return raw_string[2727:]
+
+
+def format_string_for_list(text):
+    """
+    Remove the punctuation and new lines from the text provided
+    """
+    punctuation = u',.?!"-'
+    replacement_punctuation = u'      '
+    new_text = text.translate(
+        text.maketrans(punctuation, replacement_punctuation)
+        )
+    return new_text.replace('\n', ' ').split()
