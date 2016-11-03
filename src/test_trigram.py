@@ -46,3 +46,17 @@ def test_format_string_for_list_punctuation(punc):
     removed.
     '''
     assert punc not in format_string_for_list(TEXT)
+
+
+def test_create_trigram_dict():
+    '''
+    Tests create_trigram_dict creates a dictionay with the expected shape.
+    '''
+    word = ['I', 'wish', 'I', 'may', 'I', 'wish', 'I', 'might']
+    trigram_dict = {
+        ('I', 'wish'): ['I', 'I'],
+        ('wish', 'I'): ['may', 'might'],
+        ('may', 'I'): ['wish'],
+        ('I', 'may'): ['I']
+    }
+    assert create_trigram_dict(word) == trigram_dict
