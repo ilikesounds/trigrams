@@ -1,16 +1,22 @@
 # -*- encode: utf-8 -*-
+
+"""
+This Trigram module will parse a text file to create trigrams and build a
+new text file based on those trigrams.
+"""
+
 import io
 import random
 
 
-def create_raw_string(book):
+def create_raw_string(book, char_to_read=13000, char_offset=2801):
     """
     Get text from book and transform into raw string
     """
     open_file = io.open(book, mode='r', encoding='utf-8')
-    raw_string = open_file.read(13000)
+    raw_string = open_file.read(char_to_read)
     open_file.close()
-    return raw_string[2727:]
+    return raw_string[char_offset:]
 
 
 def format_string_for_list(text):
@@ -46,13 +52,13 @@ def create_text(trigram_dict, words):
 
     keys = list(trigram_dict.keys())
     random_key = random.choice(keys)
-    paragraph = ' '.join(random_key)
+    text = ' '.join(random_key)
 
-    while len(paragraph.split()) < words:
-        last_1, last_2 = paragraph.split()[-2:]
+    while len(text.split()) < words:
+        last_1, last_2 = text.split()[-2:]
 
         if not trigram_dict.get(last_1, last_2):
             last_1, last_2 = random.choice(keys)
 
-        paragraph += ' ' + random.choice(trigram_dict[(last_1, last_2)])
-    return paragraph
+        text += ' ' + random.choice(trigram_dict[(last_1, last_2)])
+    return text
