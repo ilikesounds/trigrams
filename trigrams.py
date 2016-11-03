@@ -37,3 +37,22 @@ def create_trigram_dict(list_input):
         else:
             temp_dict[(index_0, index_1)] = [index_2]
     return temp_dict
+
+
+def create_text(trigram_dict, words):
+    """
+    Creates a new text output based on the trigram list input
+    """
+
+    keys = list(trigram_dict.keys())
+    random_key = random.choice(keys)
+    paragraph = ' '.join(random_key)
+
+    while len(paragraph.split()) < words:
+        last_1, last_2 = paragraph.split()[-2:]
+
+        if not trigram_dict.get(last_1, last_2):
+            last_1, last_2 = random.choice(keys)
+
+        paragraph += ' ' + random.choice(trigram_dict[(last_1, last_2)])
+    return paragraph
