@@ -6,6 +6,7 @@ new text file based on those trigrams.
 """
 
 import io
+import sys
 import random
 
 
@@ -62,3 +63,15 @@ def create_text(trigram_dict, words):
 
         text += ' ' + random.choice(trigram_dict[(last_1, last_2)])
     return text
+
+
+def main(source_file, word_count):
+    raw_string = create_raw_string(source_file)
+    parsed_string = format_string_for_list(raw_string)
+    trigram_dict = create_trigram_dict(parsed_string)
+    text = create_text(trigram_dict, word_count)
+    return text
+
+if __name__ == '__main__':
+    text = main(sys.argv[1], int(sys.argv[2]))
+    print(text)
